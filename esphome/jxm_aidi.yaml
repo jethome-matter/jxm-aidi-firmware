@@ -1,0 +1,75 @@
+esphome:
+  name: "jxm-aidi-dev1"
+
+esp32:
+  board: esp32dev
+  flash_size: 8MB
+  framework:
+    type: esp-idf
+    version: 5.1.5
+    # Custom sdkconfig options
+    sdkconfig_options:
+      CONFIG_COMPILER_OPTIMIZATION_SPEED: y
+
+i2c:
+  sda: 5
+  scl: 4
+  frequency: 400kHz
+  scan: true
+  id: i2c1
+
+ads1115:
+  - address: 0x49
+
+logger:
+  level: VERBOSE
+  initial_level : INFO
+
+switch:
+  - platform: gpio
+    id: AI_CUR_SW1
+    pin: GPIO17
+
+  - platform: gpio
+    id: AI_CUR_SW2
+    pin: GPIO21
+
+  - platform: gpio
+    id: AI_CUR_SW3
+    pin: GPIO32
+
+  - platform: gpio
+    id: AI_VOLT_SW1
+    pin: GPIO18
+
+  - platform: gpio
+    id: AI_VOLT_SW2
+    pin: GPIO22
+
+  - platform: gpio
+    id: AI_VOLT_SW3
+    pin: GPIO33
+
+  - platform: gpio
+    id: AI_PULL_UP1
+    pin: GPIO16
+    inverted: true
+
+  - platform: gpio
+    id: AI_PULL_UP2
+    pin: GPIO19
+    inverted: true
+
+  - platform: gpio
+    id: AI_PULL_UP3
+    pin: GPIO23
+    inverted: true
+
+binary_sensor:
+  - platform: gpio
+    id: discrete_input
+    pin:
+      number: GPIO38
+      inverted: true
+    filters:
+      - delayed_on: 50ms
