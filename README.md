@@ -13,6 +13,7 @@
  cd esphome
  pip install -r requirements.txt
  esphome compile --only-generate jxm_aidi.yaml
+ python .\split_main_cpp.py -i jxm_aidi.yaml -o ../main/
  ```
 
 ## Состав папок
